@@ -16,8 +16,7 @@ feature {NONE} -- Initialization
 			name: STRING
 			birthyear: INTEGER
 
-			name_2: STRING
-			birthyear_2: INTEGER
+			person_1, person_2: PERSON
 		do
  			Io.put_string ("Read People from Console, then print them!%N")
 			Io.put_string ("Name: ")
@@ -30,33 +29,35 @@ feature {NONE} -- Initialization
 			Io.put_string ("Year of birth: ")
 			Io.read_integer
 			birthyear := Io.last_integer
+			create person_1.make(name, birthyear)
 
 			Io.put_string ("Enter second person's data%N")
 			Io.put_string ("Name: ")
 			Io.read_line
-			name_2 := Io.last_string.twin
+			name := Io.last_string.twin
 			Io.put_string ("Year of birth: ")
 			Io.read_integer
-			birthyear_2 := Io.last_integer
+			birthyear := Io.last_integer
+			create person_2.make(name, birthyear)
 
 			-- Output data
 			Io.new_line
 			Io.put_string ("Saved person data:")
 			Io.new_line
-			Io.put_string ("Name: " + name)
+			Io.put_string ("Name: " + person_1.name)
 			Io.new_line
 			-- Concatenate String with "INTEGER" by converting the latter to STRING before that (.out call)
-			Io.put_string ("Year: " + birthyear.out)
+			Io.put_string ("Year: " + person_1.birthyear.out)
 
 			Io.new_line
 			Io.new_line
 			Io.put_string ("Saved person data #2:")
 			Io.new_line
-			Io.put_string ("Name: " + name_2)
+			Io.put_string ("Name: " + person_2.name)
 			Io.new_line
 			-- No concatenation, just using regular put_integer
 			Io.put_string ("Year: ")
-			Io.put_integer (birthyear_2)
+			Io.put_integer (person_2.birthyear)
 		end
 
 end
