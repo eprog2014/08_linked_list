@@ -11,8 +11,9 @@
 		<cluster name="linked_list" location=".\" recursive="true">
 			<file_rule>
 				<exclude>/EIFGENs$</exclude>
-				<exclude>/.svn$</exclude>
 				<exclude>/CVS$</exclude>
+				<exclude>/.svn$</exclude>
+				<exclude>/.git$</exclude>
 			</file_rule>
 		</cluster>
 	</target>
