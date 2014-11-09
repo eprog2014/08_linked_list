@@ -1,8 +1,3 @@
-note
-	description : "linked_list application root class"
-	date        : "$Date$"
-	revision    : "$Revision$"
-
 class
 	APPLICATION
 
