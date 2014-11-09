@@ -42,22 +42,20 @@ feature {NONE} -- Initialization
 
 			-- Output data
 			Io.new_line
-			Io.put_string ("Saved person data:")
+			print_person(person_1, 1)
 			Io.new_line
-			Io.put_string ("Name: " + person_1.name)
+			print_person(person_2, 2)
+		end
+
+	print_person(a_person: PERSON; number: INTEGER)
+		do
+			Io.put_string ("Saved person data #" + number.out + ":")
+			Io.new_line
+			Io.put_string ("Name: " + a_person.name)
 			Io.new_line
 			-- Concatenate String with "INTEGER" by converting the latter to STRING before that (.out call)
-			Io.put_string ("Year: " + person_1.birthyear.out)
-
+			Io.put_string ("Year: " + a_person.birthyear.out)
 			Io.new_line
-			Io.new_line
-			Io.put_string ("Saved person data #2:")
-			Io.new_line
-			Io.put_string ("Name: " + person_2.name)
-			Io.new_line
-			-- No concatenation, just using regular put_integer
-			Io.put_string ("Year: ")
-			Io.put_integer (person_2.birthyear)
 		end
 
 end
