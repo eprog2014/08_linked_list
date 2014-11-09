@@ -13,7 +13,7 @@ feature {NONE} -- Initialization
 	make
 			-- Run application.
 		local
-			first_person: PERSON
+			person_list: PERSON_LIST
 
 			persons_to_read: INTEGER
 			persons_read: INTEGER
@@ -34,7 +34,7 @@ feature {NONE} -- Initialization
 
 			-- Read PERSONs
 			Io.new_line
-			first_person := read_person(1)
+			create person_list.make (read_person(1))
 
 			from
 				-- We have already read one person
@@ -47,7 +47,9 @@ feature {NONE} -- Initialization
 			loop
 				Io.new_line
 
-				first_person.last_person.set_next_person (read_person(persons_read + 1))
+				-- Since person_list actually is a list, not just a person with some tacked-on list functionality
+				-- it makes sense that it provides features to modify that list (of course it could have been added to PERSON too earlier)
+				person_list.append(read_person(persons_read + 1))
 
 				persons_read := persons_read + 1
 			end
@@ -57,29 +59,30 @@ feature {NONE} -- Initialization
 			-- self documenting code, place code into separate feature such that its name explains
 			-- what the entire *named* code block does by aptly naming it
 			-- reduces code size of primary feature and improves its readability
-			-- Would require another parameter if we hadn't removed the loop's dependency on # of persons read
-			print_all_persons(first_person)
+			-- Would require another parameter if we hadn't removed the loop's dependency on # of persons read!
+			print_all_persons(person_list)
 
 		end
 
-	print_all_persons(first_person: PERSON)
+	print_all_persons(person_list: PERSON_LIST)
 		local
 			person_to_print_index: INTEGER
-			person_to_print: PERSON
+			-- Argument person_list is non writable, hence we need an additional variable
+			current_node: PERSON_LIST
 		do
 			from
 				-- This counter is now only necessary because print_person uses a number to get nicer output
 				-- No longer needs any knowledge of length of list
 				person_to_print_index := 1
-				person_to_print := first_person
+				current_node := person_list
 			until
 				-- Again, consider edge cases
 				-- Even works if we were to allow reading zero persons
-				person_to_print = Void
+				current_node = Void
 			loop
 				Io.new_line
-				print_person(person_to_print, person_to_print_index)
-				person_to_print := person_to_print.next_person
+				print_person(current_node.person, person_to_print_index)
+				current_node := current_node.tail
 				person_to_print_index := person_to_print_index + 1
 			end
 		end
