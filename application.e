@@ -22,9 +22,16 @@ feature {NONE} -- Initialization
 		do
 			Io.put_string ("Read People from Console, then print them!%N")
 
-			Io.put_string ("Number of person entries to save (1-5): ")
-			Io.read_integer
-			persons_to_read := Io.last_integer
+			from
+				-- Initially, persons_to_read is 0, because that is the default value for INTEGERs
+				-- Hence, the loop will always run at least once
+			until
+				1 <= persons_to_read and persons_to_read <= 5
+			loop
+				Io.put_string ("Number of person entries to save (1-5): ")
+				Io.read_integer
+				persons_to_read := Io.last_integer
+			end
 
 			Io.new_line
 			Io.put_string ("Enter person #1's data%N")
