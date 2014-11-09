@@ -17,10 +17,6 @@ feature {NONE} -- Initialization
 
 			persons_to_read: INTEGER
 			persons_read: INTEGER
-
-			-- Helpers for printing
-			person_to_print_index: INTEGER
-			person_to_print: PERSON
 		do
 			Io.put_string ("Read People from Console, then print them!%N")
 
@@ -58,7 +54,19 @@ feature {NONE} -- Initialization
 
 			-- Output data
 			Io.new_line
+			-- self documenting code, place code into separate feature such that its name explains
+			-- what the entire *named* code block does by aptly naming it
+			-- reduces code size of primary feature and improves its readability
+			-- Would require another parameter if we hadn't removed the loop's dependency on # of persons read
+			print_all_persons(first_person)
 
+		end
+
+	print_all_persons(first_person: PERSON)
+		local
+			person_to_print_index: INTEGER
+			person_to_print: PERSON
+		do
 			from
 				-- This counter is now only necessary because print_person uses a number to get nicer output
 				-- No longer needs any knowledge of length of list
