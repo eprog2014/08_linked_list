@@ -29,9 +29,9 @@ feature {NONE} -- Initialization
 				-- Initially, persons_to_read is 0, because that is the default value for INTEGERs
 				-- Hence, the loop will always run at least once
 			until
-				1 <= persons_to_read and persons_to_read <= 5
+				1 <= persons_to_read
 			loop
-				Io.put_string ("Number of person entries to save (1-5): ")
+				Io.put_string ("Number of person entries to save (>=1): ")
 				Io.read_integer
 				persons_to_read := Io.last_integer
 			end
