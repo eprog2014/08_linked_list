@@ -13,12 +13,18 @@ feature {NONE} -- Initialization
 	make
 			-- Run application.
 		local
-			person_1, person_2, person_3, person_4, person_5: PERSON
+			first_person: PERSON
 
 			persons_to_read: INTEGER
+			persons_read: INTEGER
+
+			-- Helpers for printing
+			persons_printed: INTEGER
+			person_to_print: PERSON
 		do
 			Io.put_string ("Read People from Console, then print them!%N")
 
+			-- How many PERSONs to read?
 			from
 				-- Initially, persons_to_read is 0, because that is the default value for INTEGERs
 				-- Hence, the loop will always run at least once
@@ -30,47 +36,44 @@ feature {NONE} -- Initialization
 				persons_to_read := Io.last_integer
 			end
 
-			Io.new_line
-			person_1 := read_person(1)
-
-			if persons_to_read >= 2 then
+			-- Read PERSONs
+			from
+				-- Not strictly necessary, since default value is already zero
+				-- But reinforces logic
+				persons_read := 0
+			until
+				-- Think: Does it work for edge cases (i.e. lowest and maximum amount of iterations)?
+				-- What if person_to_read is 1?
+				--   -> Will it execute at least once and only once?
+				persons_read = persons_to_read
+			loop
 				Io.new_line
-				person_2 := read_person(2)
-			end
+				-- Alternatively, use condition first_person = Void
+				if persons_read = 0 then
+					first_person := read_person(persons_read + 1)
+				else
+					first_person.last_person.set_next_person (read_person(persons_read + 1))
+				end
 
-			if persons_to_read >= 3 then
-				Io.new_line
-				person_3 := read_person(3)
-			end
-
-			if persons_to_read >= 4 then
-				Io.new_line
-				person_4 := read_person(4)
-			end
-
-			if persons_to_read >= 5 then
-				Io.new_line
-				person_5 := read_person(5)
+				persons_read := persons_read + 1
 			end
 
 			-- Output data
 			Io.new_line
-			print_person(person_1, 1)
-			if persons_to_read >= 2 then
+
+			from
+				-- Not strictly necessary, since default value is already zero
+				-- But reinforces logic
+				persons_printed := 0
+				person_to_print := first_person
+			until
+				-- Again, consider edge cases
+				persons_printed = persons_to_read
+			loop
 				Io.new_line
-				print_person(person_2, 2)
-			end
-			if persons_to_read >= 3 then
-				Io.new_line
-				print_person(person_3, 3)
-			end
-			if persons_to_read >= 4 then
-				Io.new_line
-				print_person(person_4, 4)
-			end
-			if persons_to_read >= 5 then
-				Io.new_line
-				print_person(person_5, 5)
+				print_person(person_to_print, persons_printed + 1)
+				person_to_print := person_to_print.next_person
+				persons_printed := persons_printed + 1
 			end
 		end
 
