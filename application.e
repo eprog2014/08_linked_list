@@ -37,10 +37,12 @@ feature {NONE} -- Initialization
 			end
 
 			-- Read PERSONs
+			Io.new_line
+			first_person := read_person(1)
+
 			from
-				-- Not strictly necessary, since default value is already zero
-				-- But reinforces logic
-				persons_read := 0
+				-- We have already read one person
+				persons_read := 1
 			until
 				-- Think: Does it work for edge cases (i.e. lowest and maximum amount of iterations)?
 				-- What if person_to_read is 1?
@@ -48,12 +50,8 @@ feature {NONE} -- Initialization
 				persons_read = persons_to_read
 			loop
 				Io.new_line
-				-- Alternatively, use condition first_person = Void
-				if persons_read = 0 then
-					first_person := read_person(persons_read + 1)
-				else
-					first_person.last_person.set_next_person (read_person(persons_read + 1))
-				end
+
+				first_person.last_person.set_next_person (read_person(persons_read + 1))
 
 				persons_read := persons_read + 1
 			end
