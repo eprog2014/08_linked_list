@@ -16,9 +16,18 @@ feature {NONE} -- Initialization
 			name: STRING
 			birthyear: INTEGER
 
-			person_1, person_2: PERSON
+			person_1, person_2, person_3, person_4, person_5: PERSON
+
+			persons_to_read: INTEGER
 		do
- 			Io.put_string ("Read People from Console, then print them!%N")
+			Io.put_string ("Read People from Console, then print them!%N")
+
+			Io.put_string ("Number of person entries to save (1-5): ")
+			Io.read_integer
+			persons_to_read := Io.last_integer
+
+			Io.new_line
+			Io.put_string ("Enter person #1's data%N")
 			Io.put_string ("Name: ")
 			Io.read_line
 				-- Io.last_string always refers to the same STRING object
@@ -31,20 +40,73 @@ feature {NONE} -- Initialization
 			birthyear := Io.last_integer
 			create person_1.make(name, birthyear)
 
-			Io.put_string ("Enter second person's data%N")
-			Io.put_string ("Name: ")
-			Io.read_line
-			name := Io.last_string.twin
-			Io.put_string ("Year of birth: ")
-			Io.read_integer
-			birthyear := Io.last_integer
-			create person_2.make(name, birthyear)
+			if persons_to_read >= 2 then
+				Io.new_line
+				Io.put_string ("Enter person #2's data%N")
+				Io.put_string ("Name: ")
+				Io.read_line
+				name := Io.last_string.twin
+				Io.put_string ("Year of birth: ")
+				Io.read_integer
+				birthyear := Io.last_integer
+				create person_2.make(name, birthyear)
+			end
+
+			if persons_to_read >= 3 then
+				Io.new_line
+				Io.put_string ("Enter person #3's data%N")
+				Io.put_string ("Name: ")
+				Io.read_line
+				name := Io.last_string.twin
+				Io.put_string ("Year of birth: ")
+				Io.read_integer
+				birthyear := Io.last_integer
+				create person_3.make(name, birthyear)
+			end
+
+			if persons_to_read >= 4 then
+				Io.new_line
+				Io.put_string ("Enter person #4's data%N")
+				Io.put_string ("Name: ")
+				Io.read_line
+				name := Io.last_string.twin
+				Io.put_string ("Year of birth: ")
+				Io.read_integer
+				birthyear := Io.last_integer
+				create person_4.make(name, birthyear)
+			end
+
+			if persons_to_read >= 5 then
+				Io.new_line
+				Io.put_string ("Enter person #5's data%N")
+				Io.put_string ("Name: ")
+				Io.read_line
+				name := Io.last_string.twin
+				Io.put_string ("Year of birth: ")
+				Io.read_integer
+				birthyear := Io.last_integer
+				create person_5.make(name, birthyear)
+			end
 
 			-- Output data
 			Io.new_line
 			print_person(person_1, 1)
-			Io.new_line
-			print_person(person_2, 2)
+			if persons_to_read >= 2 then
+				Io.new_line
+				print_person(person_2, 2)
+			end
+			if persons_to_read >= 3 then
+				Io.new_line
+				print_person(person_3, 3)
+			end
+			if persons_to_read >= 4 then
+				Io.new_line
+				print_person(person_4, 4)
+			end
+			if persons_to_read >= 5 then
+				Io.new_line
+				print_person(person_5, 5)
+			end
 		end
 
 	print_person(a_person: PERSON; number: INTEGER)
