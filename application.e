@@ -12,8 +12,7 @@ feature {NONE} -- Initialization
 	make
 			-- Run application.
 		do
-			--| Add your code here
-			print ("Hello Eiffel World!%N")
+			print ("Read People from Console, then print them!%N")
 		end
 
 end
