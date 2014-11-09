@@ -27,6 +27,15 @@ feature {NONE} -- Initialization
 			Io.put_string ("Year of birth: ")
 			Io.read_integer
 			birthyear := Io.last_integer
+
+			-- Output data
+			Io.new_line
+			Io.put_string ("Saved person data:")
+			Io.new_line
+			Io.put_string ("Name: " + name)
+			Io.new_line
+			-- Concatenate String with "INTEGER" by converting the latter to STRING before that (.out call)
+			Io.put_string ("Year: " + birthyear.out)
 		end
 
 end
