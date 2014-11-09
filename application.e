@@ -19,7 +19,7 @@ feature {NONE} -- Initialization
 			persons_read: INTEGER
 
 			-- Helpers for printing
-			persons_printed: INTEGER
+			person_to_print_index: INTEGER
 			person_to_print: PERSON
 		do
 			Io.put_string ("Read People from Console, then print them!%N")
@@ -60,18 +60,19 @@ feature {NONE} -- Initialization
 			Io.new_line
 
 			from
-				-- Not strictly necessary, since default value is already zero
-				-- But reinforces logic
-				persons_printed := 0
+				-- This counter is now only necessary because print_person uses a number to get nicer output
+				-- No longer needs any knowledge of length of list
+				person_to_print_index := 1
 				person_to_print := first_person
 			until
 				-- Again, consider edge cases
-				persons_printed = persons_to_read
+				-- Even works if we were to allow reading zero persons
+				person_to_print = Void
 			loop
 				Io.new_line
-				print_person(person_to_print, persons_printed + 1)
+				print_person(person_to_print, person_to_print_index)
 				person_to_print := person_to_print.next_person
-				persons_printed := persons_printed + 1
+				person_to_print_index := person_to_print_index + 1
 			end
 		end
 
