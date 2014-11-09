@@ -2,12 +2,12 @@
 <system xmlns="http://www.eiffel.com/developers/xml/configuration-1-13-0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.eiffel.com/developers/xml/configuration-1-13-0 http://www.eiffel.com/developers/xml/configuration-1-13-0.xsd" name="linked_list" uuid="42B2AEA4-B0CE-4F9B-AE58-C1A64717BA36">
 	<target name="linked_list">
 		<root feature="make" class="APPLICATION"/>
-		<option warning="true">
+		<option warning="true" void_safety="none">
 			<assertions precondition="true" postcondition="true" check="true" invariant="true" loop="true" supplier_precondition="true"/>
 		</option>
 		<setting name="console_application" value="true"/>
-		<precompile name="base_pre" location="$ISE_PRECOMP/base-safe.ecf"/>
-		<library name="base" location="$ISE_LIBRARY/library/base/base-safe.ecf"/>
+		<precompile name="base_pre" location="$ISE_PRECOMP\base.ecf"/>
+		<library name="base" location="$ISE_LIBRARY\library\base\base.ecf"/>
 		<cluster name="linked_list" location=".\" recursive="true">
 			<file_rule>
 				<exclude>/EIFGENs$</exclude>
