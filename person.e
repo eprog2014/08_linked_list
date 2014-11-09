@@ -33,4 +33,26 @@ feature
 		do
 			next_person := a_person
 		end
+
+	last_person: PERSON
+		-- Iterate over list until person without successor is found
+		do
+			from
+				-- Initialize with currently "active instance", i.e. the target of last_person call
+				-- That is, if x.last_person executes, the next line would effectively read
+				-- Result := x
+				-- This makes sense because the current person is the "last" person if it itself has no successor
+				Result := Current
+			invariant
+				Result /= Void
+			until
+				Result.next_person = Void
+			loop
+				-- UNTIL-condition does *not* hold, hence Result has a successor
+				Result := Result.next_person
+			end
+		ensure
+			last_person_exists: Result /= Void
+			has_no_successor: Result.next_person = Void
+		end
 end
