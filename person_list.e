@@ -68,6 +68,19 @@ feature
 			has_no_successor: Result.tail = Void
 		end
 
+	append(a_person: PERSON)
+		-- Take PERSON obj, wrap it in a PERSON_LIST, then append that list to the end of the current list
+		require
+			a_person_not_void: a_person /= Void
+		do
+			-- Create an instance of PERSON_LIST without binding it to a variable, you could say it's "anonymous"
+			-- create {...}.make(...) IS an expression!
+			-- Its value is the newly created object, i.e. a PERSON_LIST, which is why you can pass it as an argument to set_tail
+			-- In contrast: the regular create entity.creation_procedure() is NOT an expression, it's an instruction and has no value
+			--   -> As such, it couldn't be passed as an argument
+			last_node.set_tail (create {PERSON_LIST}.make (a_person))
+		end
+
 invariant
 	-- No node in our list can not point to a PERSON object
 	-- Simplifies iterating over the list by letting us know that we need not do any Void checks
